@@ -64,9 +64,9 @@ export function Header({ status, sessionKey, onToggleSidebar, activeSessionData,
       </button>
       <div className="flex items-center gap-3 flex-1 min-w-0 relative" ref={sessionInfoRef}>
         <img src={agentAvatarUrl || '/logo.png'} alt="PinchChat" className="h-9 w-9 rounded-2xl object-cover" onError={(e) => { const img = e.target as HTMLImageElement; if (img.src !== window.location.origin + '/logo.png') { img.src = '/logo.png'; } else { img.style.display = 'none'; } }} />
-        <button className="min-w-0 text-left group" onClick={() => setShowSessionInfo(v => !v)} title={t('header.sessionInfo')} aria-label={t('header.sessionInfo')}>
-          <div className="flex items-center gap-2">
-            <span className="font-semibold text-pc-text text-sm tracking-wide">{headerAgentName}</span>
+        <button className="min-w-0 text-left group" onClick={() => setShowSessionInfo(v => !v)} title={headerAgentName || t('header.sessionInfo')} aria-label={t('header.sessionInfo')}>
+          <div className="flex items-center gap-2 min-w-0">
+            <span className="font-semibold text-pc-text text-sm tracking-wide truncate" title={headerAgentName}>{headerAgentName}</span>
             <Sparkles className="h-3.5 w-3.5 text-pc-accent-light/60" />
           </div>
           <span className="text-xs text-pc-text-muted truncate flex items-center gap-1.5">

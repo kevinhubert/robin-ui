@@ -555,9 +555,9 @@ export function Sidebar({ sessions, activeSession, onSwitch, onDelete, onSplit, 
                         />
                       ) : (
                         <span
-                          className="flex-1 truncate"
+                          className="flex-1 min-w-[6ch] truncate"
                           onDoubleClick={(e) => startRename(s.key, customNames[s.key] || sessionDisplayName(s), e)}
-                          title={t('sidebar.rename')}
+                          title={customNames[s.key] || sessionDisplayName(s)}
                         >
                           {customNames[s.key] || sessionDisplayName(s)}
                         </span>
