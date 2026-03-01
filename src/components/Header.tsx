@@ -68,7 +68,7 @@ export function Header({ status, sessionKey, onToggleSidebar, activeSessionData,
           <div className="flex items-center gap-2 min-w-0">
             <span className="font-semibold text-pc-text text-sm tracking-wide truncate" title={headerAgentName}>{headerAgentName}</span>
             <Sparkles className="h-3.5 w-3.5 text-pc-accent-light/60" />
-          </div>
+          </div> 
           <span className="text-xs text-pc-text-muted truncate flex items-center gap-1.5">
             {activeSessionData?.agentId && (
               <span className="inline-flex items-center gap-0.5 text-pc-accent/70 font-medium">
