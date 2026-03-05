@@ -78,6 +78,7 @@ export function Chat({ messages, isGenerating, isLoadingHistory, status, session
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const isNearBottomRef = useRef(true);
   const userSentRef = useRef(false);
+  const isInitialLoad = useRef(true);
   const [showScrollBtn, setShowScrollBtn] = useState(false);
   const [newMessageCount, setNewMessageCount] = useState(0);
   const [replyTo, setReplyTo] = useState<{ preview: string } | null>(null);
@@ -161,6 +162,15 @@ export function Chat({ messages, isGenerating, isLoadingHistory, status, session
     const justFinishedLoading = wasLoadingHistoryRef.current && !isLoadingHistory;
     wasLoadingHistoryRef.current = isLoadingHistory;
     prevMessageCountRef.current = newCount;
+
+    // First paint with messages (e.g. PWA open or return to tab): scroll to latest without animation
+    if (newCount > 0 && isInitialLoad.current) {
+      isInitialLoad.current = false;
+      scrollToBottom('instant');
+      isNearBottomRef.current = true;
+      setNewMessageCount(0); // eslint-disable-line react-hooks/set-state-in-effect -- intentional: reset on initial load
+      return;
+    }
 
     if (justFinishedLoading) {
       // History just loaded — scroll to bottom, don't show indicator
