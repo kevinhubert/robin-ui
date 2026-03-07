@@ -353,7 +353,7 @@ export function Chat({ messages, isGenerating, isLoadingHistory, status, session
                     </div>
                   )}
                   <div className={`${isActiveMatch ? 'ring-1 ring-pc-accent-light/40 rounded-lg' : ''} ${msg.isArchived ? 'opacity-60' : ''}`}>
-                    <ChatMessageComponent message={msg} onRetry={!isGenerating ? handleSend : undefined} onReply={(preview) => { setReplyTo({ preview }); document.getElementById('chat-input')?.focus(); }} agentAvatarUrl={agentAvatarUrl} isFirstInGroup={isFirstInGroup} isBookmarked={isBookmarked(msg.id)} onToggleBookmark={sessionKey ? () => toggleBookmark(msg.id, sessionKey, (msg.content || '').slice(0, 120), msg.timestamp) : undefined} />
+                    <ChatMessageComponent message={msg} onRetry={!isGenerating ? handleSend : undefined} onReply={(preview) => { setReplyTo({ preview }); document.getElementById('chat-input')?.focus(); }} agentAvatarUrl={agentAvatarUrl} agentName={agentName} isFirstInGroup={isFirstInGroup} isBookmarked={isBookmarked(msg.id)} onToggleBookmark={sessionKey ? () => toggleBookmark(msg.id, sessionKey, (msg.content || '').slice(0, 120), msg.timestamp) : undefined} />
                   </div>
                 </div>
             );

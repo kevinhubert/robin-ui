@@ -31,7 +31,7 @@ export function sessionDisplayName(session: Session): string {
   if (channel) return capitalize(channel);
 
   // Fallback: clean the session key
-  return cleanSessionKey(session.key);
+  return capitalize(cleanSessionKey(session.key));
 }
 
 function capitalize(s: string): string {
