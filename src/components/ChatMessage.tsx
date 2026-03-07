@@ -448,7 +448,7 @@ function SystemEventMessage({ message }: { message: ChatMessageType }) {
   );
 }
 
-export const ChatMessageComponent = memo(function ChatMessageComponent({ message: rawMessage, onRetry, onReply, agentAvatarUrl, isFirstInGroup = true, isBookmarked = false, onToggleBookmark }: { message: ChatMessageType; onRetry?: (text: string) => void; onReply?: (preview: string) => void; agentAvatarUrl?: string; isFirstInGroup?: boolean; isBookmarked?: boolean; onToggleBookmark?: () => void }) {
+export const ChatMessageComponent = memo(function ChatMessageComponent({ message: rawMessage, onRetry, onReply, agentAvatarUrl, agentName, isFirstInGroup = true, isBookmarked = false, onToggleBookmark }: { message: ChatMessageType; onRetry?: (text: string) => void; onReply?: (preview: string) => void; agentAvatarUrl?: string; agentName?: string; isFirstInGroup?: boolean; isBookmarked?: boolean; onToggleBookmark?: () => void }) {
   useLocale(); // re-render on locale change
   const { resolvedTheme } = useTheme();
   const isLight = resolvedTheme === 'light';
@@ -527,6 +527,12 @@ export const ChatMessageComponent = memo(function ChatMessageComponent({ message
 
       {/* Bubble */}
       <div className={`min-w-0 max-w-[80%] ${isUser ? 'text-right' : ''}`}>
+        {/* Sender name — only on first message in a group */}
+        {isFirstInGroup && (
+          <div className={`text-[11px] font-medium mb-1 px-1 ${isUser ? 'text-right text-pc-text-muted' : 'text-left text-pc-accent/80'}`}>
+            {isUser ? 'You' : (agentName || 'Assistant')}
+          </div>
+        )}
         <div className={`group relative inline-block text-left rounded-3xl px-4 py-3 text-sm leading-relaxed max-w-full overflow-hidden ${
           isUser
             ? (isLight
